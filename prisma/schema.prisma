@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Course {
+  id String @id @default(ulid())
+  title String
+  description String
+  image_url String?
+
+  modules Module[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("courses")
+}
+
+model Module {
+  id String @id @default(ulid())
+  title String
+  description String
+  image_url String?
+
+  course_id String
+  course Course @relation(fields: [course_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  classes Class[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("modules")
+}
+
+model Class {
+  id String @id @default(ulid())
+  title String
+  description String
+  video_url String?
+  file_url String?
+
+  module_id String
+  module Module @relation(fields: [module_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("classes")
+}
