@@ -47,6 +47,12 @@ export class CourseService {
         description: data.description,
         image_url: imageUrl ? imageUrl : null,
       },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        image_url: true,
+      },
     });
 
     return this.formatCourse(

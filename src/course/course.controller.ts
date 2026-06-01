@@ -98,7 +98,7 @@ export class CourseController {
     if (file) {
       return this.service.updatePhoto(id, file);
     }
-    throw new BadRequestException('File not founded');
+    throw new BadRequestException('File not found');
   }
 
   @Patch(':id')
