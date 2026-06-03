@@ -103,8 +103,6 @@ export class CourseController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() data: UpdateCourseDTO) {
-    console.log(data);
-
     return this.service.update(id, data);
   }
 

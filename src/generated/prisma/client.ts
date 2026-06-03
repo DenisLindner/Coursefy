@@ -54,3 +54,8 @@ export type Module = Prisma.ModuleModel
  * 
  */
 export type Class = Prisma.ClassModel
+/**
+ * Model File
+ * 
+ */
+export type File = Prisma.FileModel

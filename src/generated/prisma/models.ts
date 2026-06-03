@@ -11,4 +11,5 @@
 export type * from './models/Course.js'
 export type * from './models/Module.js'
 export type * from './models/Class.js'
+export type * from './models/File.js'
 export type * from './commonInputTypes.js'

@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Course: 'Course',
   Module: 'Module',
-  Class: 'Class'
+  Class: 'Class',
+  File: 'File'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -102,13 +103,23 @@ export const ClassScalarFieldEnum = {
   title: 'title',
   description: 'description',
   video_url: 'video_url',
-  file_url: 'file_url',
   module_id: 'module_id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ClassScalarFieldEnum = (typeof ClassScalarFieldEnum)[keyof typeof ClassScalarFieldEnum]
+
+
+export const FileScalarFieldEnum = {
+  id: 'id',
+  file_url: 'file_url',
+  class_id: 'class_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FileScalarFieldEnum = (typeof FileScalarFieldEnum)[keyof typeof FileScalarFieldEnum]
 
 
 export const SortOrder = {

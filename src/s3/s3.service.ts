@@ -47,6 +47,28 @@ export class S3Service {
     }
   }
 
+  async uploadFile(file: Express.Multer.File): Promise<string> {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const fileExt = extname(file.originalname);
+    const fileName = `files/coursefy-${uniqueSuffix}${fileExt}`;
+
+    try {
+      const command = new PutObjectCommand({
+        Bucket: this.bucketName,
+        Key: fileName,
+        Body: file.buffer,
+        ContentType: file.mimetype,
+      });
+
+      await this.s3Client.send(command);
+
+      return `/${this.bucketName}/${fileName}`;
+    } catch (error) {
+      console.log('Server error: ' + error);
+      throw new InternalServerErrorException('Error uploading file to AWS S3');
+    }
+  }
+
   async uploadVideo(file: Express.Multer.File): Promise<string> {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     const fileExt = extname(file.originalname);

@@ -29,7 +29,6 @@ export type ClassMinAggregateOutputType = {
   title: string | null
   description: string | null
   video_url: string | null
-  file_url: string | null
   module_id: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -40,7 +39,6 @@ export type ClassMaxAggregateOutputType = {
   title: string | null
   description: string | null
   video_url: string | null
-  file_url: string | null
   module_id: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -51,7 +49,6 @@ export type ClassCountAggregateOutputType = {
   title: number
   description: number
   video_url: number
-  file_url: number
   module_id: number
   createdAt: number
   updatedAt: number
@@ -64,7 +61,6 @@ export type ClassMinAggregateInputType = {
   title?: true
   description?: true
   video_url?: true
-  file_url?: true
   module_id?: true
   createdAt?: true
   updatedAt?: true
@@ -75,7 +71,6 @@ export type ClassMaxAggregateInputType = {
   title?: true
   description?: true
   video_url?: true
-  file_url?: true
   module_id?: true
   createdAt?: true
   updatedAt?: true
@@ -86,7 +81,6 @@ export type ClassCountAggregateInputType = {
   title?: true
   description?: true
   video_url?: true
-  file_url?: true
   module_id?: true
   createdAt?: true
   updatedAt?: true
@@ -170,7 +164,6 @@ export type ClassGroupByOutputType = {
   title: string
   description: string
   video_url: string | null
-  file_url: string | null
   module_id: string
   createdAt: Date
   updatedAt: Date
@@ -202,10 +195,10 @@ export type ClassWhereInput = {
   title?: Prisma.StringFilter<"Class"> | string
   description?: Prisma.StringFilter<"Class"> | string
   video_url?: Prisma.StringNullableFilter<"Class"> | string | null
-  file_url?: Prisma.StringNullableFilter<"Class"> | string | null
   module_id?: Prisma.StringFilter<"Class"> | string
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Class"> | Date | string
+  files_url?: Prisma.FileListRelationFilter
   module?: Prisma.XOR<Prisma.ModuleScalarRelationFilter, Prisma.ModuleWhereInput>
 }
 
@@ -214,10 +207,10 @@ export type ClassOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   video_url?: Prisma.SortOrderInput | Prisma.SortOrder
-  file_url?: Prisma.SortOrderInput | Prisma.SortOrder
   module_id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  files_url?: Prisma.FileOrderByRelationAggregateInput
   module?: Prisma.ModuleOrderByWithRelationInput
 }
 
@@ -229,10 +222,10 @@ export type ClassWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Class"> | string
   description?: Prisma.StringFilter<"Class"> | string
   video_url?: Prisma.StringNullableFilter<"Class"> | string | null
-  file_url?: Prisma.StringNullableFilter<"Class"> | string | null
   module_id?: Prisma.StringFilter<"Class"> | string
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Class"> | Date | string
+  files_url?: Prisma.FileListRelationFilter
   module?: Prisma.XOR<Prisma.ModuleScalarRelationFilter, Prisma.ModuleWhereInput>
 }, "id">
 
@@ -241,7 +234,6 @@ export type ClassOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   video_url?: Prisma.SortOrderInput | Prisma.SortOrder
-  file_url?: Prisma.SortOrderInput | Prisma.SortOrder
   module_id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -258,7 +250,6 @@ export type ClassScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Class"> | string
   description?: Prisma.StringWithAggregatesFilter<"Class"> | string
   video_url?: Prisma.StringNullableWithAggregatesFilter<"Class"> | string | null
-  file_url?: Prisma.StringNullableWithAggregatesFilter<"Class"> | string | null
   module_id?: Prisma.StringWithAggregatesFilter<"Class"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Class"> | Date | string
@@ -269,9 +260,9 @@ export type ClassCreateInput = {
   title: string
   description: string
   video_url?: string | null
-  file_url?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  files_url?: Prisma.FileCreateNestedManyWithoutClassInput
   module: Prisma.ModuleCreateNestedOneWithoutClassesInput
 }
 
@@ -280,10 +271,10 @@ export type ClassUncheckedCreateInput = {
   title: string
   description: string
   video_url?: string | null
-  file_url?: string | null
   module_id: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  files_url?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ClassUpdateInput = {
@@ -291,9 +282,9 @@ export type ClassUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  file_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files_url?: Prisma.FileUpdateManyWithoutClassNestedInput
   module?: Prisma.ModuleUpdateOneRequiredWithoutClassesNestedInput
 }
 
@@ -302,10 +293,10 @@ export type ClassUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  file_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   module_id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files_url?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ClassCreateManyInput = {
@@ -313,7 +304,6 @@ export type ClassCreateManyInput = {
   title: string
   description: string
   video_url?: string | null
-  file_url?: string | null
   module_id: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -324,7 +314,6 @@ export type ClassUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  file_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -334,7 +323,6 @@ export type ClassUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  file_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   module_id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -355,7 +343,6 @@ export type ClassCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   video_url?: Prisma.SortOrder
-  file_url?: Prisma.SortOrder
   module_id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -366,7 +353,6 @@ export type ClassMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   video_url?: Prisma.SortOrder
-  file_url?: Prisma.SortOrder
   module_id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -377,10 +363,14 @@ export type ClassMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   video_url?: Prisma.SortOrder
-  file_url?: Prisma.SortOrder
   module_id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type ClassScalarRelationFilter = {
+  is?: Prisma.ClassWhereInput
+  isNot?: Prisma.ClassWhereInput
 }
 
 export type ClassCreateNestedManyWithoutModuleInput = {
@@ -425,14 +415,28 @@ export type ClassUncheckedUpdateManyWithoutModuleNestedInput = {
   deleteMany?: Prisma.ClassScalarWhereInput | Prisma.ClassScalarWhereInput[]
 }
 
+export type ClassCreateNestedOneWithoutFiles_urlInput = {
+  create?: Prisma.XOR<Prisma.ClassCreateWithoutFiles_urlInput, Prisma.ClassUncheckedCreateWithoutFiles_urlInput>
+  connectOrCreate?: Prisma.ClassCreateOrConnectWithoutFiles_urlInput
+  connect?: Prisma.ClassWhereUniqueInput
+}
+
+export type ClassUpdateOneRequiredWithoutFiles_urlNestedInput = {
+  create?: Prisma.XOR<Prisma.ClassCreateWithoutFiles_urlInput, Prisma.ClassUncheckedCreateWithoutFiles_urlInput>
+  connectOrCreate?: Prisma.ClassCreateOrConnectWithoutFiles_urlInput
+  upsert?: Prisma.ClassUpsertWithoutFiles_urlInput
+  connect?: Prisma.ClassWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClassUpdateToOneWithWhereWithoutFiles_urlInput, Prisma.ClassUpdateWithoutFiles_urlInput>, Prisma.ClassUncheckedUpdateWithoutFiles_urlInput>
+}
+
 export type ClassCreateWithoutModuleInput = {
   id?: string
   title: string
   description: string
   video_url?: string | null
-  file_url?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  files_url?: Prisma.FileCreateNestedManyWithoutClassInput
 }
 
 export type ClassUncheckedCreateWithoutModuleInput = {
@@ -440,9 +444,9 @@ export type ClassUncheckedCreateWithoutModuleInput = {
   title: string
   description: string
   video_url?: string | null
-  file_url?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  files_url?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ClassCreateOrConnectWithoutModuleInput = {
@@ -479,10 +483,65 @@ export type ClassScalarWhereInput = {
   title?: Prisma.StringFilter<"Class"> | string
   description?: Prisma.StringFilter<"Class"> | string
   video_url?: Prisma.StringNullableFilter<"Class"> | string | null
-  file_url?: Prisma.StringNullableFilter<"Class"> | string | null
   module_id?: Prisma.StringFilter<"Class"> | string
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Class"> | Date | string
+}
+
+export type ClassCreateWithoutFiles_urlInput = {
+  id?: string
+  title: string
+  description: string
+  video_url?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  module: Prisma.ModuleCreateNestedOneWithoutClassesInput
+}
+
+export type ClassUncheckedCreateWithoutFiles_urlInput = {
+  id?: string
+  title: string
+  description: string
+  video_url?: string | null
+  module_id: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ClassCreateOrConnectWithoutFiles_urlInput = {
+  where: Prisma.ClassWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClassCreateWithoutFiles_urlInput, Prisma.ClassUncheckedCreateWithoutFiles_urlInput>
+}
+
+export type ClassUpsertWithoutFiles_urlInput = {
+  update: Prisma.XOR<Prisma.ClassUpdateWithoutFiles_urlInput, Prisma.ClassUncheckedUpdateWithoutFiles_urlInput>
+  create: Prisma.XOR<Prisma.ClassCreateWithoutFiles_urlInput, Prisma.ClassUncheckedCreateWithoutFiles_urlInput>
+  where?: Prisma.ClassWhereInput
+}
+
+export type ClassUpdateToOneWithWhereWithoutFiles_urlInput = {
+  where?: Prisma.ClassWhereInput
+  data: Prisma.XOR<Prisma.ClassUpdateWithoutFiles_urlInput, Prisma.ClassUncheckedUpdateWithoutFiles_urlInput>
+}
+
+export type ClassUpdateWithoutFiles_urlInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  module?: Prisma.ModuleUpdateOneRequiredWithoutClassesNestedInput
+}
+
+export type ClassUncheckedUpdateWithoutFiles_urlInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  module_id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClassCreateManyModuleInput = {
@@ -490,7 +549,6 @@ export type ClassCreateManyModuleInput = {
   title: string
   description: string
   video_url?: string | null
-  file_url?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -500,9 +558,9 @@ export type ClassUpdateWithoutModuleInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  file_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files_url?: Prisma.FileUpdateManyWithoutClassNestedInput
 }
 
 export type ClassUncheckedUpdateWithoutModuleInput = {
@@ -510,9 +568,9 @@ export type ClassUncheckedUpdateWithoutModuleInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  file_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files_url?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ClassUncheckedUpdateManyWithoutModuleInput = {
@@ -520,11 +578,39 @@ export type ClassUncheckedUpdateManyWithoutModuleInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   video_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  file_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type ClassCountOutputType
+ */
+
+export type ClassCountOutputType = {
+  files_url: number
+}
+
+export type ClassCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  files_url?: boolean | ClassCountOutputTypeCountFiles_urlArgs
+}
+
+/**
+ * ClassCountOutputType without action
+ */
+export type ClassCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassCountOutputType
+   */
+  select?: Prisma.ClassCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ClassCountOutputType without action
+ */
+export type ClassCountOutputTypeCountFiles_urlArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FileWhereInput
+}
 
 
 export type ClassSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -532,11 +618,12 @@ export type ClassSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   title?: boolean
   description?: boolean
   video_url?: boolean
-  file_url?: boolean
   module_id?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  files_url?: boolean | Prisma.Class$files_urlArgs<ExtArgs>
   module?: boolean | Prisma.ModuleDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ClassCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["class"]>
 
 export type ClassSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -544,7 +631,6 @@ export type ClassSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   title?: boolean
   description?: boolean
   video_url?: boolean
-  file_url?: boolean
   module_id?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -556,7 +642,6 @@ export type ClassSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   title?: boolean
   description?: boolean
   video_url?: boolean
-  file_url?: boolean
   module_id?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -568,15 +653,16 @@ export type ClassSelectScalar = {
   title?: boolean
   description?: boolean
   video_url?: boolean
-  file_url?: boolean
   module_id?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ClassOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "video_url" | "file_url" | "module_id" | "createdAt" | "updatedAt", ExtArgs["result"]["class"]>
+export type ClassOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "video_url" | "module_id" | "createdAt" | "updatedAt", ExtArgs["result"]["class"]>
 export type ClassInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  files_url?: boolean | Prisma.Class$files_urlArgs<ExtArgs>
   module?: boolean | Prisma.ModuleDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ClassCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClassIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   module?: boolean | Prisma.ModuleDefaultArgs<ExtArgs>
@@ -588,6 +674,7 @@ export type ClassIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $ClassPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Class"
   objects: {
+    files_url: Prisma.$FilePayload<ExtArgs>[]
     module: Prisma.$ModulePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -595,7 +682,6 @@ export type $ClassPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     title: string
     description: string
     video_url: string | null
-    file_url: string | null
     module_id: string
     createdAt: Date
     updatedAt: Date
@@ -993,6 +1079,7 @@ readonly fields: ClassFieldRefs;
  */
 export interface Prisma__ClassClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  files_url<T extends Prisma.Class$files_urlArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Class$files_urlArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   module<T extends Prisma.ModuleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ModuleDefaultArgs<ExtArgs>>): Prisma.Prisma__ModuleClient<runtime.Types.Result.GetResult<Prisma.$ModulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1027,7 +1114,6 @@ export interface ClassFieldRefs {
   readonly title: Prisma.FieldRef<"Class", 'String'>
   readonly description: Prisma.FieldRef<"Class", 'String'>
   readonly video_url: Prisma.FieldRef<"Class", 'String'>
-  readonly file_url: Prisma.FieldRef<"Class", 'String'>
   readonly module_id: Prisma.FieldRef<"Class", 'String'>
   readonly createdAt: Prisma.FieldRef<"Class", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Class", 'DateTime'>
@@ -1429,6 +1515,30 @@ export type ClassDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Classes to delete.
    */
   limit?: number
+}
+
+/**
+ * Class.files_url
+ */
+export type Class$files_urlArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the File
+   */
+  select?: Prisma.FileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the File
+   */
+  omit?: Prisma.FileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FileInclude<ExtArgs> | null
+  where?: Prisma.FileWhereInput
+  orderBy?: Prisma.FileOrderByWithRelationInput | Prisma.FileOrderByWithRelationInput[]
+  cursor?: Prisma.FileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FileScalarFieldEnum | Prisma.FileScalarFieldEnum[]
 }
 
 /**

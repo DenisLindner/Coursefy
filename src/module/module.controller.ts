@@ -55,9 +55,9 @@ export class ModuleController {
     return this.service.create(data, file);
   }
 
-  @Get()
-  async findAll() {
-    return this.service.findAll();
+  @Get(':courseId')
+  async findAllByCourseId(@Param('courseId') courseId: string) {
+    return this.service.findAllByCourseId(courseId);
   }
 
   @Get(':id')
@@ -103,8 +103,6 @@ export class ModuleController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() data: UpdateModuleDTO) {
-    console.log(data);
-
     return this.service.update(id, data);
   }
 

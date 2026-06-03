@@ -43,7 +43,7 @@ model Class {
   title String
   description String
   video_url String?
-  file_url String?
+  files_url File[]
 
   module_id String
   module Module @relation(fields: [module_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
@@ -52,4 +52,17 @@ model Class {
   updatedAt DateTime @updatedAt
 
   @@map("classes")
+}
+
+model File {
+  id String @id @default(ulid())
+  file_url String
+
+  class_id String
+  class Class @relation(fields: [class_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("files")
 }

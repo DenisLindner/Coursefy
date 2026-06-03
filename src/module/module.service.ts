@@ -37,7 +37,10 @@ export class ModuleService {
     }
 
     const moduleExists = await this.prisma.module.findFirst({
-      where: { title: { equals: data.title, mode: 'insensitive' } },
+      where: {
+        course_id: data.courseId,
+        title: { equals: data.title, mode: 'insensitive' },
+      },
     });
 
     if (moduleExists) {
@@ -77,8 +80,17 @@ export class ModuleService {
     );
   }
 
-  async findAll(): Promise<ModuleResponseDTO[]> {
+  async findAllByCourseId(courseId: string): Promise<ModuleResponseDTO[]> {
+    const courseExists = await this.prisma.course.findUnique({
+      where: { id: courseId },
+    });
+
+    if (!courseExists) {
+      throw new NotFoundException('Course not found with this id');
+    }
+
     const modules = await this.prisma.module.findMany({
+      where: { course_id: courseId },
       select: {
         id: true,
         title: true,
